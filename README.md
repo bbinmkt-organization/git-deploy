@@ -26,7 +26,7 @@ Rename __git-deploy/deploy.sample.php__ to __git-deploy/deploy.php__, and update
 define("TOKEN", "secret-token");
 define("REMOTE_REPOSITORY", "git@github.com:username/custom-project.git");
 define("DIR", "/var/www/vhosts/repositories/custom-project");
-define("BRANCH", "refs/heads/master");
+define("BRANCH", "your_default_branch_name");
 define("LOGFILE", "deploy.log");
 define("GIT", "/usr/bin/git");
 define("MAX_EXECUTION_TIME", 180);
