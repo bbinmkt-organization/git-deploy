@@ -69,6 +69,11 @@ if (!empty(TOKEN) && isset($_SERVER["HTTP_X_HUB_SIGNATURE"]) && $token !== hash_
 } elseif (!empty(TOKEN) && !isset($_SERVER["HTTP_X_HUB_SIGNATURE"]) && !isset($_SERVER["HTTP_X_GITLAB_TOKEN"]) && !isset($_GET["token"])) {
     forbid($file, "No token detected");
 } else {
+    // check whether event is merged pull request or not
+    if (is_null($json["pull_request"]["merged_at"])){
+        exit;
+    }
+
     // check if pushed branch matches branch specified in config
     if ($json["repository"]["default_branch"] === BRANCH) {
         fputs($file, $content . PHP_EOL);
@@ -80,6 +85,7 @@ if (!empty(TOKEN) && isset($_SERVER["HTTP_X_HUB_SIGNATURE"]) && $token !== hash_
 
             // write to the log
             fputs($file, "*** AUTO PULL INITIATED ***" . "\n");
+            fputs($file, "merge commit sha: ". $json["pull_request"]["merge_commit_sha"] . "\n");
 
             /**
              * Attempt to reset specific hash if specified
