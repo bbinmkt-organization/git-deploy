@@ -71,6 +71,7 @@ if (!empty(TOKEN) && isset($_SERVER["HTTP_X_HUB_SIGNATURE"]) && $token !== hash_
 } else {
     // check whether event is merged pull request or not
     if (is_null($json["pull_request"]["merged_at"])){
+        fclose($file);
         exit;
     }
 
