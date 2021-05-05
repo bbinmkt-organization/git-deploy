@@ -26,8 +26,8 @@ if (isset($json["checkout_sha"])) {
 }
 
 // write the time to the log
-date_default_timezone_set("UTC");
-fputs($file, date("d-m-Y (H:i:s)", $time) . "\n");
+date_default_timezone_set("UTC+8");
+fputs($file, date("Y-m-d (H:i:s)", $time) . "\n");
 
 // specify that the response does not contain HTML
 header("Content-Type: text/plain");
